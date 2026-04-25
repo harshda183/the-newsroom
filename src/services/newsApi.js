@@ -39,9 +39,39 @@
 //   }
 // };
 
-import axios from "axios";
+// import axios from "axios";
 
-const API_KEY = "7e7a5a10416947f756d796e49fc0a625";
+// const API_KEY = "";
+
+// export const fetchTopHeadlines = async (
+//   category = "general",
+//   page = 1,
+//   query = ""
+// ) => {
+//   try {
+//     let url = "";
+
+//     if (query && query.trim() !== "") {
+//       // 🔍 Search
+//       url = `https://gnews.io/api/v4/search?q=${query}&lang=en&max=6&page=${page}&token=${API_KEY}`;
+//     } else {
+//       // 📰 Headlines
+//       url = `https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&max=6&page=${page}&token=${API_KEY}`;
+//     }
+
+//     const res = await axios.get(url);
+
+//     return {
+//       articles: res.data.articles || [],
+//       totalResults: res.data.totalArticles || 0,
+//     };
+//   } catch (err) {
+//     console.error("API ERROR:", err);
+//     return { articles: [], totalResults: 0 };
+//   }
+// };
+
+import axios from "axios";
 
 export const fetchTopHeadlines = async (
   category = "general",
@@ -49,17 +79,9 @@ export const fetchTopHeadlines = async (
   query = ""
 ) => {
   try {
-    let url = "";
-
-    if (query && query.trim() !== "") {
-      // 🔍 Search
-      url = `https://gnews.io/api/v4/search?q=${query}&lang=en&max=6&page=${page}&token=${API_KEY}`;
-    } else {
-      // 📰 Headlines
-      url = `https://gnews.io/api/v4/top-headlines?category=${category}&lang=en&max=6&page=${page}&token=${API_KEY}`;
-    }
-
-    const res = await axios.get(url);
+    const res = await axios.get("/.netlify/functions/news", {
+      params: { category, page, query },
+    });
 
     return {
       articles: res.data.articles || [],
