@@ -18,7 +18,7 @@ export const fetchHistoryEvents = async () => {
       }
     );
 
-    return res.data.slice(0, 4); // 🔥 limit to 4 cards
+    return res.data.slice(0, 4); 
   } catch (err) {
     console.error("History API error:", err);
     return [];
